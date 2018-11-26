@@ -26,9 +26,10 @@ export default {
         };
     },
     methods:{
-        getLogin(){
+       async getLogin(){
+            // es7的一个新特性（看着像同步的）
             // this.$http()
-            this.$http.post('login',this.formdata).then((res)=>{
+            const res=await this.$http.post('login',this.formdata)
                 console.log(res);
                 const {data,meta:{msg,status}}=res.data;
                 if(status===200){
@@ -38,7 +39,23 @@ export default {
                 }else{
                     this.$message.warning(msg)
                 }
-            })
+            
+
+
+
+            // this.$http()
+            // this.$http.post('login',this.formdata).then((res)=>{
+            //     console.log(res);
+            //     const {data,meta:{msg,status}}=res.data;
+            //     if(status===200){
+            //         this.$router.push({name:'home'});
+            //         localStorage.setItem('token',data.token);
+            //         this.$message.success(msg);
+            //     }else{
+            //         this.$message.warning(msg)
+            //     }
+            // })
+
         }
     }
 
