@@ -8,7 +8,7 @@
         <el-form-item label="密码" >
             <el-input v-model="formdata.password"></el-input>
         </el-form-item>
-        <el-button type="primary" class="login-btn">主要按钮</el-button>
+        <el-button type="primary" class="login-btn" @click.prevent='getLogin'>主要按钮</el-button>
     </el-form>
 
 </div>
@@ -24,6 +24,22 @@ export default {
 
             }
         };
+    },
+    methods:{
+        getLogin(){
+            // this.$http()
+            this.$http.post('login',this.formdata).then((res)=>{
+                console.log(res);
+                const {data,meta:{msg,status}}=res.data;
+                if(status===200){
+                    this.$router.push({name:'home'});
+                    localStorage.setItem('token',data.token);
+                    this.$message.success(msg);
+                }else{
+                    this.$message.warning(msg)
+                }
+            })
+        }
     }
 
 }
