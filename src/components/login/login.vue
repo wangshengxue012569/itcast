@@ -38,6 +38,7 @@ export default {
                     this.$message.success(msg);
                 }else{
                     this.$message.warning(msg)
+                    this.formdata={}
                 }
             
 

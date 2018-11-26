@@ -106,6 +106,12 @@
 
 <script>
 export default {
+    beforeCreate(){
+        if(!localStorage.getItem('token')){
+            this.$router.push({name:'login'})
+            this.$message.error('请您先登录')
+        }
+    },
     methods:{
         loginout(){
             localStorage.clear();
